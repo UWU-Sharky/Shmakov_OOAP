@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace project
 {
-    class Task
+    public class CustomTask
     {
         private int level = 0;
         public int Level
@@ -27,138 +27,201 @@ namespace project
         };
 
 
-        public Task()
+        public CustomTask()
         {
             this.level = levelDurations[levelDurations.Keys.ElementAt(new Random().Next(levelDurations.Count))];
         }
 
-        public Task(string level)
+        public CustomTask(string level)
         {
             this.level = levelDurations[level];
         }
 
     }
 
-    class Queue
+    public class Queue
     {
-        public List<Task> tasks;
+        private readonly object _lock = new object();
 
-        public Singleton bridge;
+        private static readonly object _queuesLock = new object();
+
+        public List<CustomTask> CustomTasks;
+
+        private static Singleton bridge = Singleton.Instance;
+
+        public static List<Queue> _queues { get; } = new List<Queue>();
+
+
         public int Count
         {
             get
             {
-                return tasks.Count;
+                lock (_lock)
+                {
+                    return CustomTasks.Count;
+                }
             }
         }
 
         public bool IsEmpty
         {
-            get { return tasks.Count == 0; }
+            get
+            {
+                lock (_lock)
+                {
+                    return CustomTasks.Count == 0;
+                }
+            }
         }
 
         public Queue()
         {
-            this.tasks = new List<Task>();
+            lock (_queuesLock)
+            {
+                this.CustomTasks = new List<CustomTask>();
+                _queues.Add(this);
+            }
 
         }
 
         public Queue(int capacity)
         {
-            this.tasks = new List<Task>(capacity);
-            for (int i = 0; i < capacity; i++)
+            lock (_queuesLock)
             {
-                this.tasks.Add(new Task());
+                this.CustomTasks = new List<CustomTask>(capacity);
+                for (int i = 0; i < capacity; i++)
+                {
+                    this.CustomTasks.Add(new CustomTask());
+                    _queues.Add(this);
+                }
             }
         }
 
         public Queue(int capacity, string level)
         {
-            this.tasks = new List<Task>(capacity);
-            for (int i = 0; i < capacity; i++)
+            lock (_queuesLock)
             {
-                this.tasks.Add(new Task(level));
+                this.CustomTasks = new List<CustomTask>(capacity);
+                for (int i = 0; i < capacity; i++)
+                {
+                    this.CustomTasks.Add(new CustomTask(level));
+                    _queues.Add(this);
+                }
             }
         }
 
-        public void Add(Task task)
+        public void Add(CustomTask CustomTask)
         {
-            this.tasks.Add(task);
-        }
-
-        public Task Delete()
-        {
-            if (this.tasks.Count == 0)
+            lock (_lock)
             {
-                throw new InvalidOperationException("Queue is empty");
+                this.CustomTasks.Add(CustomTask);
             }
-
-            Task task = this.tasks[0];
-            this.tasks.RemoveAt(0);
-            return task;
         }
 
-        public void ApplyWorker(Worker worker)
+        public CustomTask Delete()
         {
-            this.bridge = Singleton.getInstance(worker);
+            lock (_lock)
+            {
+                if (this.CustomTasks.Count == 0)
+                {
+                    throw new InvalidOperationException("Queue is empty");
+                }
+
+                CustomTask CustomTask = this.CustomTasks[0];
+                this.CustomTasks.RemoveAt(0);
+                return CustomTask;
+            }
+        }
+
+        public void ApplyWorker()
+        {
+            Worker worker = bridge.FindWorker(this);
+            worker.Working(this);
         }
 
         public void Clear()
         {
-            this.tasks.Clear();
-        }
-
-
-    }
-
-    class Singleton
-    {
-        private static Singleton instance;
-        public Worker worker { get; private set; }
-        protected Singleton(Worker worker)
-        {
-            this.worker = worker;
-        }
-
-        public static Singleton getInstance(Worker worker)
-        {
-            if (instance == null)
+            lock (_lock)
             {
-                instance = new Singleton(worker);
+                this.CustomTasks.Clear();
             }
-            return instance;
+        }
+
+
+    }
+
+    public sealed class Singleton
+    {
+        private static readonly object _lock = new object();
+        // Lazy<T> гарантирует потокобезопасную ленивую инициализацию
+        private static readonly Lazy<Singleton> _instance =
+            new Lazy<Singleton>(() => new Singleton(), isThreadSafe: true);
+
+        public static Singleton Instance
+        {
+            get
+            {
+                return _instance.Value;
+            }
+        }
+
+        private Singleton() { }
+
+        public Worker FindWorker(Queue queue)
+        {
+            while (true)
+            {
+                lock (_lock)
+                {
+                    foreach (Worker worker in Worker.Workers)
+                    {
+                        if (!worker.IsWorking)
+                        {
+                            worker.IsWorking = true;
+                            return worker;
+                        }
+                    }
+                }
+                Thread.Sleep(100);
+            }
         }
     }
 
-    class Worker
+    public class Worker
     {
         private static int _idCounter = 0;
+
+        public static List<Worker> Workers { get; } = new List<Worker>();
+
         public int Id { get; private set; }
 
         public bool IsWorking = false;
+
         public Worker()
         {
             _idCounter++;
-            this.Id = _idCounter; // Как будто бы можно что-то придумать про многопоточность
+            this.Id = _idCounter;
+            Workers.Add(this);
         }
+
         public void Working(Queue queue)
         {
             int c = 1;
-            this.IsWorking = true;
             Console.WriteLine($"\nОбработчик_{this.Id} Загрузка:");
             while (queue.Count > 0)
             {
-                Task task = queue.Delete();
+                CustomTask CustomTask = queue.Delete();
 
                 Console.WriteLine($"\n\t Задача_{c} в процессе: ");
 
-                for (int i = 0; i <= task.Level; i++)
+                for (int i = 0; i <= CustomTask.Level; i++)
                 {
-                    Client.DrawProgress(i, task.Level);
+                    Client.DrawProgress(i, CustomTask.Level);
                     Thread.Sleep(1000);
                 }
                 c++;
             }
+            this.IsWorking = false;
         }
     }
 
@@ -181,10 +244,36 @@ namespace project
     {
         static void Main()
         {
-            Worker worker = new();
-            Queue queue = new(10);
-            queue.ApplyWorker(worker);
-            queue.bridge.worker.Working(queue);
+            Console.WriteLine("Введите кол-во очередей: ");
+            int N = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите кол-во worker-ов: ");
+            int k = Convert.ToInt32(Console.ReadLine());
+
+            for(int i = 0; i < N; i++)
+            {
+                Worker myWorker = new();
+            }
+
+            for (int i = 0; i < k; i++)
+            {
+                Queue myQueue = new(10);
+            }
+
+            // Запускаем обработку очередей в потоках и сохраняем задачи
+            List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+            foreach (Queue queue in Queue._queues)
+            {
+                var task = System.Threading.Tasks.Task.Run(() =>
+                {
+                    queue.ApplyWorker();
+                });
+                tasks.Add(task);
+            }
+
+            // Ожидаем завершения всех задач
+            System.Threading.Tasks.Task.WhenAll(tasks).Wait();
+
+            Console.WriteLine("Завершено");
         }
     }
 }
