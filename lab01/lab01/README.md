@@ -12,7 +12,8 @@
 # Решение
    Использование паттерна *Singleton*
 # Диаграмма классов
-![Паттерн Одиночка](SingletonFinnaly.jpg)
+![Паттерн Одиночка](SingletonFinally.jpg)
+
 
 
 
