@@ -1,0 +1,3 @@
+G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\x64\Debug\Project1.vcxproj.AssemblyReference.cache
+G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\x64\Debug\Project1.MyForm.resources
+G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\x64\Debug\Project1.vcxproj.GenerateResource.cache
