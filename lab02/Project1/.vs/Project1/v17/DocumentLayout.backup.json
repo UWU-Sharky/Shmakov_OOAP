@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{D9A45713-B64E-7E59-39CB-7A77BBE44754}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D9A45713-B64E-7E59-39CB-7A77BBE44754}|Project1\\Project1.vcxproj|G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
-      "RelativeMoniker": "D:0:0:{D9A45713-B64E-7E59-39CB-7A77BBE44754}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D9A45713-B64E-7E59-39CB-7A77BBE44754}|Project1\\Project1.vcxproj|G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D9A45713-B64E-7E59-39CB-7A77BBE44754}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -22,23 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MyForm.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.h",
-              "RelativeDocumentMoniker": "Project1\\MyForm.h",
-              "ToolTip": "G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "Project1\\MyForm.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-16T15:01:59.121Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
@@ -48,14 +32,14 @@
               "RelativeDocumentMoniker": "Project1\\MyForm.h",
               "ToolTip": "G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.h",
               "RelativeToolTip": "Project1\\MyForm.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAAAAAAAArwKkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-15T04:44:25.124Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MyForm.cpp",
               "DocumentMoniker": "G:\\Code\\GitHubRep\\Shmakov_OOAP\\lab02\\Project1\\Project1\\MyForm.cpp",
               "RelativeDocumentMoniker": "Project1\\MyForm.cpp",

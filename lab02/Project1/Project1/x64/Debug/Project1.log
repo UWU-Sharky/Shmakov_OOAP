@@ -1,15 +1,4 @@
-﻿  MyForm.cpp
-G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(41,22): warning C4490: override: неправильное использование спецификатора переопределения; "Project1::ConcreteFlyweightManaged::Operation" не соответствует методу базового класса-ссылки
-  (компиляция исходного файла "MyForm.cpp")
-      G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(41,22):
-      "new" или "override" разрешены только, когда существует соответствующий базовый метод из класса ref
-      G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(41,22):
-      Соответствующий базовый метод "Project1::IFlyweight::Operation" происходит из класса интерфейса (а не класса ref)
-  
-G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(161,40): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "MyForm.cpp")
-  
-  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+﻿  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   Project1.vcxproj -> G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\x64\Debug\Project1.exe
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.

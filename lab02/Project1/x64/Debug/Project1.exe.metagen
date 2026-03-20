@@ -14,23 +14,24 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
-Class Project1.UnsharedConcreteFlyweightManaged: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-    Void .ctor(Int32, Int32, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.UnsharedConcreteFlyweight: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32, Int32, Int32, Int32, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     Int32 X : Public
     Int32 Y : Public
     Int32 SpeedX : Public
     Int32 SpeedY : Public
+    System.String Flyweight : Public
 Interface Project1.IFlyweight: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Methods:
-    Operation(UnsharedConcreteFlyweightManaged, Graphics): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
-Class Project1.ConcreteFlyweightManaged: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Operation(UnsharedConcreteFlyweight, Graphics): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Project1.ConcreteFlyweight: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(System.String, System.String, Single): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Interfaces:
     Project1.IFlyweight
   Methods:
-    Operation(UnsharedConcreteFlyweightManaged, Graphics): PrivateScope, Public, Virtual, HideBySig
-Class Project1.FiguresFlyweightFactoryManaged: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Operation(UnsharedConcreteFlyweight, Graphics): PrivateScope, Public, Virtual, HideBySig
+Class Project1.FlyweightFactory: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     GetFlyweight(String): PrivateScope, Public, HideBySig
