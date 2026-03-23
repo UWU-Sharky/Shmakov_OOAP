@@ -1,4 +1,16 @@
-﻿  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
-  Project1.vcxproj -> G:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\x64\Debug\Project1.exe
-  "pwsh.exe" не является внутренней или внешней
-  командой, исполняемой программой или пакетным файлом.
+﻿  MyForm.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\include\format(42): warning STL4038: The contents of <format> are available only with C++20 or later.
+D:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(47,22): warning C4490: override: неправильное использование спецификатора переопределения; "Project1::ConcreteFlyweight::Operation" не соответствует методу базового класса-ссылки
+  (компиляция исходного файла "MyForm.cpp")
+      D:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(47,22):
+      "new" или "override" разрешены только, когда существует соответствующий базовый метод из класса ref
+      D:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(47,22):
+      Соответствующий базовый метод "Project1::IFlyweight::Operation" происходит из класса интерфейса (а не класса ref)
+  
+D:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\Project1\MyForm.h(229,40): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "MyForm.cpp")
+  
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  Создание кода...
+  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  Project1.vcxproj -> D:\Code\GitHubRep\Shmakov_OOAP\lab02\Project1\x64\Debug\Project1.exe
