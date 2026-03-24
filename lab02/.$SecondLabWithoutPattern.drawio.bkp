@@ -1,0 +1,39 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Страница-1" id="qhrYT6hVKUq8HTHDn0Po">
+    <mxGraphModel dx="2047" dy="1219" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-1" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="ShapeObject" vertex="1">
+          <mxGeometry height="140" width="160" x="460" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-2" parent="Gvr4jB13JmKGhomBMXi2-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ X: Integer&lt;div&gt;+ Y: Integer&lt;/div&gt;&lt;div&gt;+ SpeedX:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Integer&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ SpeedY:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Integer&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ ShapeType: String&lt;/div&gt;&lt;div&gt;&lt;div&gt;+ Color: String&lt;/div&gt;&lt;div&gt;+ Weight: Double&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="114" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- objects&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="100" x="460" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-15" edge="1" parent="1" source="Gvr4jB13JmKGhomBMXi2-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=diamondThin;startFill=0;startSize=20;" target="Gvr4jB13JmKGhomBMXi2-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="920" />
+              <mxPoint x="540" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-11" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="MyForm" vertex="1">
+          <mxGeometry height="170" width="230" x="60" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-12" parent="Gvr4jB13JmKGhomBMXi2-11" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- timer: Time&lt;div&gt;- currentShape: String&lt;/div&gt;&lt;div&gt;- pictureBox1: PictureBox&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="54" width="230" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-13" parent="Gvr4jB13JmKGhomBMXi2-11" style="line;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" value="" vertex="1">
+          <mxGeometry height="8" width="230" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Gvr4jB13JmKGhomBMXi2-14" parent="Gvr4jB13JmKGhomBMXi2-11" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ pictureBox1_Paint():&lt;div&gt;+ pictureBox1_MouseDown():&lt;/div&gt;&lt;div&gt;+ MyForm_KeyDown():&lt;/div&gt;&lt;div&gt;+ timer_Tick():&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="82" width="230" y="88" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
