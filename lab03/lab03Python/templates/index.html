@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Hold'em - Memento Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Бот</h2>
+    <div class="info">Фишки: <span id="bot-chips">0</span> $</div>
+    <div id="bot-cards" class="card-container"></div>
+
+    <div class="poker-table">
+        <div id="stage-name" class="stage-badge">Подготовка...</div>
+        <div id="community-cards" class="card-container"></div>
+        <div class="pot-display">Банк: <span id="pot">0</span> $</div>
+        <div id="game-status" class="status-message"></div>
+    </div>
+
+
+    <div id="player-cards" class="card-container"></div>
+    <div class="info">Ваши фишки: <span id="player-chips">0</span> $</div>
+
+    <div class="controls">
+    <div class="bet-controls">
+        <input type="range" id="bet-range" min="10" max="500" step="10" value="50">
+        <label>Ставка: <span id="bet-value">50</span> $</label>
+    </div>
+        <button id="btn-bet" class="btn btn-primary">Поставить</button>
+        <button id="btn-undo" class="btn btn-danger">Отменить ход</button>
+        <button id="btn-new" class="btn btn-info">Раздать заново</button>
+        <button id="btn-save" class="control-button">Сохранить точку</button>
+    </div>
+
+    <div class="info" id="player-combo">Ваша комбинация: Ожидание...</div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
