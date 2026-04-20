@@ -15,10 +15,10 @@ function renderGame(state) {
 
     const range = document.getElementById('bet-range');
     const betValueDisplay = document.getElementById('bet-value');
-// 1. Ограничиваем максимум ползунка текущим балансом игрока
+// Ограничиваем максимум ползунка текущим балансом игрока
     range.max = state.player_chips;
 
-    // 2. Если после Undo или новой раздачи ставка больше баланса, сбрасываем её
+    // Если после Undo или новой раздачи ставка больше баланса, сбрасываем её
     if (parseInt(range.value) > state.player_chips) {
         range.value = Math.min(50, state.player_chips);
         betValueDisplay.innerText = range.value;
@@ -30,8 +30,8 @@ function renderGame(state) {
         }
     const statusElem = document.getElementById('game-status');
     if (state.stage === 'Шоудаун') {
-        statusElem.innerText = state.status; // Например: "Бот выиграл! У него Флеш"
-        statusElem.style.color = "#ffeb3b"; // Подсветим золотым
+        statusElem.innerText = state.status;
+        statusElem.style.color = "#ffeb3b";
     } else {
         statusElem.innerText = "";
     }
@@ -42,9 +42,6 @@ function renderGame(state) {
     console.log("Карты на столе:", state.community_cards);
     }
 
-// localStorage.setItem('player_chips', state.player_chips);
-// localStorage.setItem('bot_chips', state.bot_chips);
-
 function displayCards(elementId, cardsArray) {
     const container = document.getElementById(elementId);
     if (!container) return; // Проверка, что блок вообще есть
@@ -54,11 +51,9 @@ function displayCards(elementId, cardsArray) {
     cardsArray.forEach(cardFileName => {
         const img = document.createElement('img');
         
-        // ВНИМАНИЕ: Проверь эту строку. 
-        // Если в Python ты уже добавил ".png", здесь его быть НЕ должно.
         img.src = "/static/images/" + cardFileName; 
         
-        img.className = 'card-img'; // Твой стиль из CSS
+        img.className = 'card-img'; 
         container.appendChild(img);
     });
 }
@@ -92,95 +87,54 @@ async function saveCurrentGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Привязка кнопок
-    document.getElementById('btn-bet').onclick = () => sendAction('bet');
-    document.getElementById('btn-undo').onclick = () => sendAction('undo');
-    document.getElementById('btn-save').onclick = saveCurrentGame;
-
-    // Новая раздача с учетом localStorage
-    document.getElementById('btn-new').onclick = () => {
-        const p = localStorage.getItem('poker_player_chips');
-        const b = localStorage.getItem('poker_bot_chips');
-        
-        if (p && b) {
-            fetch(`/api/new_hand?p_chips=${p}&b_chips=${b}`)
-                .then(res => res.json())
-                .then(state => renderGame(state));
-        } else {
-            sendAction('new_hand');
-        }
-    };
-
-    // Ползунок ставки
+    // Получаем элементы ползунка
     const betRange = document.getElementById('bet-range');
-    const betValue = document.getElementById('bet-value');
-    if (betRange) {
+    const betValueDisplay = document.getElementById('bet-value');
+
+    // Связываем ползунок с текстом
+    if (betRange && betValueDisplay) {
         betRange.oninput = function() {
-            betValue.innerText = this.value;
+            betValueDisplay.innerText = this.value;
         };
     }
 
-    // Загрузка начального состояния
-    sendAction('state');
-});
-
-// 1. Функция сохранения (вынесена вверх для удобства)
-async function saveCurrentGame() {
-    const response = await fetch('/api/save');
-    const result = await response.json();
-    if (result.status === 'success') {
-        alert("Игра успешно сохранена!"); 
-    }
-}
-
-// 2. Единый блок инициализации при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    // Объявляем ВСЕ кнопки внутри
+    // Инициализируем кнопки
     const btnBet = document.getElementById('btn-bet');
     const btnUndo = document.getElementById('btn-undo');
     const btnNew = document.getElementById('btn-new');
-    const btnSave = document.getElementById('btn-save'); // Добавили кнопку сохранения
-    
-    const betRange = document.getElementById('bet-range');
-    const betValue = document.getElementById('bet-value');
+    const btnSave = document.getElementById('btn-save');
 
-    // Привязываем логику ползунка
-    if (betRange && betValue) {
-        betRange.oninput = function() {
-            betValue.innerText = this.value;
+    if (btnSave) btnSave.onclick = saveCurrentGame;
+    if (btnUndo) btnUndo.onclick = () => sendAction('undo');
+    
+    // Исправленная кнопка ставки: передаем значение ползунка
+    if (btnBet) {
+        btnBet.onclick = () => {
+            const currentBet = parseInt(betRange.value);
+            sendAction('bet', currentBet); 
         };
     }
 
-    // Привязываем клики (с проверкой на существование кнопок)
-    if (btnBet) btnBet.onclick = () => sendAction('bet');
-    if (btnUndo) btnUndo.onclick = () => sendAction('undo');
-    if (btnSave) btnSave.onclick = saveCurrentGame; // Привязываем сохранение ТУТ
-
-    // Логика кнопки "Новая раздача"
     if (btnNew) {
         btnNew.onclick = () => {
             const p = localStorage.getItem('poker_player_chips');
             const b = localStorage.getItem('poker_bot_chips');
+            const url = (p && b) ? `/api/new_hand?p_chips=${p}&b_chips=${b}` : '/api/new_hand';
             
-            if (p && b) {
-                fetch(`/api/new_hand?p_chips=${p}&b_chips=${b}`)
-                    .then(res => res.json())
-                    .then(state => renderGame(state));
-            } else {
-                sendAction('new_hand');
-            }
+            fetch(url)
+                .then(res => res.json())
+                .then(state => renderGame(state));
         };
     }
 
-    // Начальная загрузка данных
-    const savedPlayer = localStorage.getItem('poker_player_chips');
-    const savedBot = localStorage.getItem('poker_bot_chips');
-
-    if (savedPlayer && savedBot) {
-        fetch(`/api/new_hand?p_chips=${savedPlayer}&b_chips=${savedBot}`)
+    // Начальная загрузка при открытии страницы
+    const p = localStorage.getItem('poker_player_chips');
+    const b = localStorage.getItem('poker_bot_chips');
+    if (p && b) {
+        fetch(`/api/new_hand?p_chips=${p}&b_chips=${b}`)
             .then(res => res.json())
             .then(state => renderGame(state));
     } else {
-        sendAction('new_hand'); 
+        sendAction('state');
     }
 });

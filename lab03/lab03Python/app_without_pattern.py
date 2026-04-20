@@ -20,40 +20,29 @@ class Deck:
         dealt, self.cards = self.cards[:num], self.cards[num:]
         return dealt
 
-class GameMemento:
-    def __init__(self, state):
-        self._state = copy.deepcopy(state)
-    def get_state(self):
-        return self._state
-
-class Caretaker:
-    def __init__(self):
-        self._history = []
-        self._current_index = -1
-        
-    def save(self, memento):
-        if self._current_index < len(self._history) - 1:
-            self._history = self._history[:self._current_index + 1]
-        
-        self._history.append(memento)
-        self._current_index = len(self._history) - 1
-        print(f"Сохранено. Текущий индекс: {self._current_index}")
-
-    def undo(self):
-        if self._current_index >= 0:
-            print(f"Откат к индексу: {self._current_index}")
-            result = self._history[self._current_index]
-            self._current_index -= 1
-            return result
-        return None
-
 class PokerGame:
     def __init__(self):
         self.small_blind = 10
         self.big_blind = 20
+        self._history = []
+        self._current_index = -1 
         
-        self.caretaker = Caretaker()
-        self.start_new_hand()
+        self.start_new_hand(1000, 1000)
+
+    def manual_save(self):
+
+        if self._current_index < len(self._history) - 1:
+            self._history = self._history[:self._current_index + 1]
+
+        self._history.append(copy.deepcopy(self.state))
+        self._current_index = len(self._history) - 1
+        print(f"Сохранено напрямую. Индекс: {self._current_index}")
+
+    def restore_state(self):
+        if self._current_index >= 0:
+            self.state = copy.deepcopy(self._history[self._current_index])
+            print(f"Откат к индексу: {self._current_index}")
+            self._current_index -= 1
         
 
     def start_new_hand(self, p_chips=None, b_chips=None):
@@ -88,23 +77,11 @@ class PokerGame:
             'bot_hand': deck.deal(2),
             'community_cards': []
         }
-           
-    def manual_save(self):
-        memento = GameMemento(self.state)
-        self.caretaker.save(memento)
-        print("Состояние сохранено вручную!")
-
-    def restore_state(self):
-        memento = self.caretaker.undo()
-        if memento:
-            self.state = memento.get_state()
-    
 
     def place_bet(self, amount):
         if self.state['stage'] == 'Шоудаун':
             return
 
-        # Проверяем, хватает ли денег
         if self.state['player_chips'] >= amount:            
             self.state['player_chips'] -= amount
             self.state['bot_chips'] -= amount
@@ -144,7 +121,7 @@ class PokerGame:
             self.state['player_chips'] += pot // 2
             self.state['bot_chips'] += pot // 2
             
-        self.state['pot'] = 0 # Обнуляем банк для следующей раздачи
+        self.state['pot'] = 0 
 
     def get_hand_rank(self, cards):
             ranks = '2345678910JQKA'
@@ -160,7 +137,7 @@ class PokerGame:
             # Проверка на Стрит 
             unique_values = sorted(list(set(values)), reverse=True)
             is_straight = False
-            straight_high_card = -1
+            straight_high_card = 0
             
             if len(unique_values) >= 5:
                 for i in range(len(unique_values) - 4):
@@ -171,12 +148,11 @@ class PokerGame:
                 # Специфический случай: Стрит от Туза до пятерки (A-2-3-4-5)
                 if not is_straight and set([12, 0, 1, 2, 3]).issubset(set(unique_values)):
                     is_straight = True
-                    straight_high_card = 3
+                    straight_high_card = 3 
 
-            # Подсчет совпадений 
             counts = {v: values.count(v) for v in set(values)}
             count_values = list(counts.values())
-                        
+            
             if is_flush:
                 # Оставляем только карты той масти, которой у нас Флеш
                 flush_cards_values = sorted([ranks.index(str(c.rank)) for c in cards if c.suit == flush_suit], reverse=True)
@@ -269,9 +245,10 @@ class PokerGame:
             self.state['pot'] += (amount * 2)
             
             self._next_stage() 
-            print(f"Стадия изменена на: {self.state['stage']}") # Отладка в терминале
-            
+            print(f"Стадия изменена на: {self.state['stage']}") 
+
 game = PokerGame()
+
 
 @app.route('/')
 def index():
@@ -281,13 +258,14 @@ def index():
 def get_state():
     return jsonify(game.get_json_state())
 
-@app.route('/api/bet', methods=['GET', 'POST'])
+@app.route('/api/bet', methods=['GET', 'POST']) 
 def make_bet():
     if request.method == 'POST':
         data = request.get_json()
         amount = data.get('amount', 50)
     else:
         amount = 50
+        print("ПРЕДУПРЕЖДЕНИЕ: Пришел GET запрос вместо POST")
 
     game.place_bet(int(amount))
     return jsonify(game.get_json_state())

@@ -24,13 +24,13 @@
 
     <div class="controls">
     <div class="bet-controls">
-        <input type="range" id="bet-range" min="10" max="500" step="10" value="50">
+        <input type="range" id="bet-range" min="0" max="500" step="10" value="50">
         <label>Ставка: <span id="bet-value">50</span> $</label>
     </div>
         <button id="btn-bet" class="btn btn-primary">Поставить</button>
-        <button id="btn-undo" class="btn btn-danger">Отменить ход</button>
         <button id="btn-new" class="btn btn-info">Раздать заново</button>
-        <button id="btn-save" class="control-button">Сохранить точку</button>
+        <button id="btn-save" class="btn btn-save">Сохранить точку</button>
+        <button id="btn-undo" class="btn btn-danger">Откатиться обратно</button>
     </div>
 
     <div class="info" id="player-combo">Ваша комбинация: Ожидание...</div>
