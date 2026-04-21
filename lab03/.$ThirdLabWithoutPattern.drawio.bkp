@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Страница-1" id="ZiSvDWd5FLrK5VfAlmXq">
+    <mxGraphModel dx="752" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-2" edge="1" parent="1" source="UsNVImKNTKLgaoLr1PVT-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;endArrow=open;endFill=0;endSize=8;" target="UsNVImKNTKLgaoLr1PVT-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-3" edge="1" parent="1" source="UsNVImKNTKLgaoLr1PVT-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;endArrow=open;endFill=0;endSize=8;" target="UsNVImKNTKLgaoLr1PVT-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-4" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="PockerGame" vertex="1">
+          <mxGeometry height="290" width="320" x="30" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-5" parent="UsNVImKNTKLgaoLr1PVT-4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ small_blind: Integer&lt;div&gt;+ big_blind: Integer&lt;/div&gt;&lt;div&gt;+ caretaker: Caretaker&lt;/div&gt;&lt;div&gt;+ state: state&lt;/div&gt;&lt;div&gt;# history: state[]&lt;/div&gt;&lt;div&gt;# current_index: Integer&lt;/div&gt;" vertex="1">
+          <mxGeometry height="94" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-6" parent="UsNVImKNTKLgaoLr1PVT-4" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="320" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-7" parent="UsNVImKNTKLgaoLr1PVT-4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ start_new_hand(p_chips: Integer, b_chips: Integer)&lt;/div&gt;&lt;div&gt;+ manual_save():&lt;/div&gt;&lt;div&gt;+ restore_state():&lt;/div&gt;&lt;div&gt;+ place_ber(amount: Integer):&lt;/div&gt;&lt;div&gt;# next_stage():&lt;/div&gt;&lt;div&gt;+ resolve_winner():&lt;/div&gt;&lt;div&gt;+ get_hand_rank(cards: Card):&lt;/div&gt;&lt;div&gt;+ get_json_state():&lt;/div&gt;&lt;div&gt;+ determine_winner():&lt;/div&gt;&lt;div&gt;+ get_status_text():&lt;/div&gt;" vertex="1">
+          <mxGeometry height="162" width="320" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-19" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Card" vertex="1">
+          <mxGeometry height="70" width="160" x="40" y="737" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-20" parent="UsNVImKNTKLgaoLr1PVT-19" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ rank: rank&lt;div&gt;+ suit: suit&lt;/div&gt;" vertex="1">
+          <mxGeometry height="44" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-21" edge="1" parent="1" source="UsNVImKNTKLgaoLr1PVT-22" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;dashed=1;dashPattern=8 8;endSize=8;" target="UsNVImKNTKLgaoLr1PVT-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-22" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Deck" vertex="1">
+          <mxGeometry height="114" width="160" x="250" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-23" parent="UsNVImKNTKLgaoLr1PVT-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ suits: suit[]&lt;div&gt;+ ranks: String[]&lt;/div&gt;&lt;div&gt;+ cards: Card[]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="54" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-24" parent="UsNVImKNTKLgaoLr1PVT-22" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UsNVImKNTKLgaoLr1PVT-25" parent="UsNVImKNTKLgaoLr1PVT-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deal(cards: Card):&amp;nbsp; Card[]" vertex="1">
+          <mxGeometry height="26" width="160" y="88" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
