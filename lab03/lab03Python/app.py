@@ -99,19 +99,6 @@ class PokerGame:
         if memento:
             self.state = memento.get_state()
     
-
-    def place_bet(self, amount):
-        if self.state['stage'] == 'Шоудаун':
-            return
-
-        # Проверяем, хватает ли денег
-        if self.state['player_chips'] >= amount:            
-            self.state['player_chips'] -= amount
-            self.state['bot_chips'] -= amount
-            self.state['pot'] += (amount * 2)
-            
-            self._next_stage()
-    
     def _next_stage(self):
         stage = self.state['stage']
         deck = self.state['deck']
@@ -128,6 +115,18 @@ class PokerGame:
         elif stage == 'Ривер':
             self.state['stage'] = 'Шоудаун'
             self.resolve_winner()
+            
+    def place_bet(self, amount):
+        if self.state['stage'] == 'Шоудаун':
+            return
+
+        if self.state['player_chips'] >= amount:            
+            self.state['player_chips'] -= amount
+            self.state['bot_chips'] -= amount
+            self.state['pot'] += (amount * 2)
+            
+            self._next_stage() 
+            print(f"Стадия изменена на: {self.state['stage']}")
     
     def resolve_winner(self):
         p_score, _ = self.get_hand_rank(self.state['player_hand'] + self.state['community_cards'])
@@ -258,18 +257,6 @@ class PokerGame:
                 return f"Ничья! Оба собрали {p_name}."
                 
         return f"Стадия: {stage}. Ждем ваших действий."
-
-    def place_bet(self, amount):
-        if self.state['stage'] == 'Шоудаун':
-            return
-
-        if self.state['player_chips'] >= amount:            
-            self.state['player_chips'] -= amount
-            self.state['bot_chips'] -= amount
-            self.state['pot'] += (amount * 2)
-            
-            self._next_stage() 
-            print(f"Стадия изменена на: {self.state['stage']}") # Отладка в терминале
             
 game = PokerGame()
 

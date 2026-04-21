@@ -27,7 +27,7 @@ class PokerGame:
         self._history = []
         self._current_index = -1 
         
-        self.start_new_hand(1000, 1000)
+        self.start_new_hand()
 
     def manual_save(self):
 
